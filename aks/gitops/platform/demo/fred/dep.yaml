@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fred
+  labels:
+    app.kubernetes.io/name: fred
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: fred
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: fred
+    spec:
+      serviceAccountName: fred
+      securityContext:
+        {}
+      containers:
+        - name: fred
+          securityContext:
+            {}
+          image: "ghcr.io/whiteducksoftware/sample-mvc:fred"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
