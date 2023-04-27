@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: akv-demo
+  name: fred
   labels:
     app.kubernetes.io/name: fred
 spec:
