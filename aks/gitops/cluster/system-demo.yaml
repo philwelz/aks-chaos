@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: system-demo
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: system-config
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-config
+  path: ./aks/gitops/platform/demo
+  prune: true
+  validation: server

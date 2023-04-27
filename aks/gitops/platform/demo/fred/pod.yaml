@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: akv-demo
+  labels:
+    app.kubernetes.io/name: fred
+spec:
+  containers:
+    - image: ghcr.io/whiteducksoftware/sample-mvc:fred
+      name: fred
+      ports:
+        - name: http
+          containerPort: 80
+      livenessProbe:
+        httpGet:
+          path: /
+          port: http
+      readinessProbe:
+        httpGet:
+          path: /
+          port: http
+  nodeSelector:
+    kubernetes.io/os: linux
